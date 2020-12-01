@@ -45,17 +45,13 @@ REAL_IP_HEADER=${REAL_IP_HEADER:-X-Forwarded-For}
 LOG_IP_VAR=${LOG_IP_VAR:-remote_addr}
 
 FLARUM_DEBUG=${FLARUM_DEBUG:-false}
-#FLARUM_BASE_URL=${FLARUM_BASE_URL:-http://flarum.docker}
 FLARUM_FORUM_TITLE="${FLARUM_FORUM_TITLE:-Flarum Dockerized}"
 FLARUM_API_PATH="${FLARUM_API_PATH:-api}"
 FLARUM_ADMIN_PATH="${FLARUM_ADMIN_PATH:-admin}"
 
-#DB_HOST=${DB_HOST:-localhost}
 DB_PORT=${DB_PORT:-3306}
 DB_NAME=${DB_NAME:-flarum}
 DB_USER=${DB_USER:-flarum}
-#DB_PASSWORD=${DB_PASSWORD:-asupersecretpassword}
-DB_PREFIX=${DB_PREFIX:-flarum_}
 DB_TIMEOUT=${DB_TIMEOUT:-60}
 
 # Timezone
@@ -145,7 +141,6 @@ databaseConfiguration:
   database: ${DB_NAME}
   username: ${DB_USER}
   password: ${DB_PASSWORD}
-  prefix: ${DB_PREFIX}
   port: ${DB_PORT}
 adminUser:
   username: flarum
@@ -176,10 +171,8 @@ su-exec flarum:flarum cat > /opt/flarum/config.php <<EOL
     'password' => '${DB_PASSWORD}',
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
-    'prefix' => '${DB_PREFIX}',
     'strict' => false,
     'engine' => 'InnoDB',
-    'prefix_indexes' => true,
   ),
   'url' => '${FLARUM_BASE_URL}',
   'paths' =>
